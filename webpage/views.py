@@ -9,3 +9,15 @@ def home(request):
     ]
 
     return render(request, 'home.html', {'news_feed': news_feed})
+
+
+def create_recipe(request):
+    return render(request, 'create_recipe.html')
+
+
+def pantry(request):
+    return render(request, 'pantry.html')
+
+
+def cart(request):
+    return render(request, 'cart.html')
