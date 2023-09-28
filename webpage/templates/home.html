@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header>
+        <h1>Meal Prep App</h1>
+    </header>
+
+    <main>
+        <a href="{% url 'create_recipe' %}" class="wide-button">Create a Recipe</a>
+        <div class="button-container">
+            <a href="{% url 'pantry' %}">Pantry</a>
+            <a href="{% url 'shopping_cart' %}">Shopping Cart</a>
+        </div>
+
+        <div class="news-feed-container">
+            <div class="news-feed">
+                <ul>
+                    {% for news_item in news_feed %}
+                        <li>{{ news_item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript code for scrolling the news feed
+        var newsFeed = document.querySelector('.news-feed');
+
+        function scrollNews() {
+            newsFeed.scrollTop += 1;
+            if (newsFeed.scrollTop % newsFeed.scrollHeight === 0) {
+                newsFeed.scrollTop = 0;
+            }
+        }
+
+        setInterval(scrollNews, 50);
+    </script>
+{% endblock %}
