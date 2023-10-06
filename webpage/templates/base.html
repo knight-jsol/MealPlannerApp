@@ -8,7 +8,8 @@
 <body>
     <header>
         <h1>Meal planner app</h1>
-        <link rel="stylesheet" type="text/css" href="home.css">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>

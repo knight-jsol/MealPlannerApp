@@ -114,6 +114,8 @@ USE_TZ = True
 
 APPEND_SLASH: True
 
+STATICFILES_DIRS = [BASE_DIR / "webpage" / "stylesheets"]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
