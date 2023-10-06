@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.http import HttpResponseRedirect
 
 def home(request):
     news_feed = [
@@ -16,7 +17,29 @@ def create_recipe(request):
 
 
 def pantry(request):
+    pantry_items = request.COOKIES.get('pantry_items', '').split(',') if request.COOKIES.get('pantry_items') else []
     return render(request, 'pantry.html')
+
+
+# Adds item to pantry
+def add_item(request):
+    item_name = request.POST.get('item_name', '')
+
+    if item_name:
+        pantry_items = request.COOKIES.get('pantry_items', '').split(',') if request.COOKIES.get('pantry_items') else []
+        pantry_items.append(item_name)
+        response = render(request, 'pantry.html', {'pantry_items': pantry_items})
+        response.set_cookie('pantry_items', ','.join(pantry_items))
+        return response
+
+    return HttpResponseRedirect('/pantry')
+
+
+# Clears the pantry
+def clear_pantry(request):
+    response = HttpResponseRedirect('/pantry')
+    response.delete_cookie('pantry_items')
+    return response
 
 
 def cart(request):
