@@ -24,12 +24,13 @@ def pantry(request):
 # Adds item to pantry
 def add_item(request):
     item_name = request.POST.get('item_name', '')
+    item_amount = request.POST.get('item_amount', '')
 
-    if item_name:
+    if item_name and item_amount:
         pantry_items = request.COOKIES.get('pantry_items', '').split(',') if request.COOKIES.get('pantry_items') else []
-        pantry_items.append(item_name)
+        pantry_items.append((item_name, item_amount))
         response = render(request, 'pantry.html', {'pantry_items': pantry_items})
-        response.set_cookie('pantry_items', ','.join(pantry_items))
+        response.set_cookie('pantry_items', ','.join([f'{item[0]}:{item[1]}' for item in pantry_items]))
         return response
 
     return HttpResponseRedirect('/pantry')

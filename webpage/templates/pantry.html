@@ -11,7 +11,8 @@
 
 <form action="{% url 'add_item' %}" method="post">
     {% csrf_token %}
-    <input type="text" name="item_name" required>
+    <input type="text" name="item_name" placeholder="Item Name" required>
+    <input type="number" name="item_amount" placeholder="Item Amount" required>
     <input type="submit" value="Add Item">
 </form>
 
