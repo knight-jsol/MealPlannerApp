@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'ilovejrock',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -112,9 +116,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-APPEND_SLASH: True
-
-STATICFILES_DIRS = [BASE_DIR / "webpage" / "stylesheets"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
