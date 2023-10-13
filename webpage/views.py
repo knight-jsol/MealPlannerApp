@@ -45,3 +45,7 @@ def clear_pantry(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+
+def lgoin(request):
+    return render(request, 'login.html')
