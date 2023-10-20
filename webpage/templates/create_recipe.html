@@ -1,8 +1,50 @@
-{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <header>
-        <h1>Create Recipe</h1>
-        <link rel="stylesheet" type="text/css" href="home.css">
-    </header>
+<html>
+<head>
+    <title>Allergy and Dietary Preferences</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+
+    <h1 class="center-text">Allergy and Dietary Preferences</h1>
+
+    <form>
+        <h2 class="subheading">Select All That Apply</h2>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="peanutAllergy" id="peanutAllergy">
+            <label class="form-check-label" for="peanutAllergy">Peanut Allergy</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="dairyAllergy" id="dairyAllergy">
+            <label class="form-check-label" for="dairyAllergy">Dairy Allergy</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
+            <label class="form-check-label" for="vegetarian">Vegetarian</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
+            <label class="form-check-label" for="vegan">Vegan</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 {% endblock %}
