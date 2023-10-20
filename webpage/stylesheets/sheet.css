@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.subheading {
+    font-size: 16px;
+    text-align: center;
+    color: #555;
+    margin-bottom: 25px; /* Added some space below the subheading for better spacing */
+}
+
+form {
+    background-color: #eaf6fd;
+    border-radius: 10px;
+    padding: 25px;  /* Increased padding for a bit more spacious look */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 450px;  /* Increased max-width slightly for a better fit with Bootstrap */
+    margin: 0 auto;
+}
+
+button.btn-primary {
+    background-color: #1E90FF;
+    border: none;
+}
+
+button.btn-primary:hover, button.btn-primary:focus {
+    background-color: #007acc;
+}
