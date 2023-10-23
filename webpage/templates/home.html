@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+    </head>
+
     <header>
         <h1>Meal Prep App</h1>
     </header>
