@@ -1,86 +1,121 @@
-/* Reset some default styles in browsers */
-* {
+/* General styling for body and html */
+body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
+    font-family: Arial, sans-serif;
+    background-color: #EFEFEF;
+}
+@keyframes scrollBg {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-330px);
+  }
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+.scroll-bg {
+  height: 100%;
+  width: 100%;
+  position: fixed;  /* Keep only this position property */
+  padding-bottom: 330px;
+  background-color: #E8BA9B;
+  background-image: url('https://andreivictor.ro/codepen/scroll-bg-animation-pinterest/bg_pasta_grid-3f880df3.jpg');
+  background-size: cover;
+  animation: scrollBg 35s linear forwards;
+  z-index: 0;  /* set a base z-index for the background */
 }
 
+/* Styling for the header */
 header {
-    background-color: #50b3a2;
-    color: #ffffff;
-    text-align: center;
-    padding: 1rem 0;
+    background-color: #aaaaaa;
+    padding: 50px 50px;
+    align-items: center;
+    z-index: 10;  /* Increase this value */
+    position: relative;  /* Ensure this is positioned relative */
+     text-align: center;
+    font-size: 30px;  /* Increase font size */
+    font-weight: bold;  /* Bold font weight */
 }
 
+header h1 {
+    color: white;
+    margin: 0;
+    z-index: 3;
+}
+
+/* Styling for main content */
 main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px;
-}
-
-.wide-button {
-    display: inline-block;
-    background-color: #50b3a2;
-    color: white;
-    padding: 10px 20px;
-    margin: 20px 0;
-    border-radius: 5px;
+    height: calc(100vh - 100px); /* Assuming your header is 100px tall, this ensures the main content only occupies the remaining viewport height */
+    padding: 0px;
 }
 
 .button-container {
-    display: flex;
+    display: flex; /* Change this to flex for more control over centering */
+    flex-wrap: wrap; /* Allow the buttons to wrap if there's not enough space */
+    justify-content: center; /* Center the buttons horizontally */
     gap: 10px;
+    margin-bottom: 0px;
+    z-index: 3;
+}
+
+
+.wide-button {
+    width: 80%;
+    max-width: 600px;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.45);  /* A strong blue color, for example */
+    color: white;  /* Change text color to white for contrast */
+    text-align: center;
+    font-size: 40px;  /* Increase font size */
+    font-weight: bold;  /* Bold font weight */
+    padding: 60px 20px;  /* Increase padding */
+    border-radius: 10px;  /* Slightly rounded corners */
+    margin: 0 auto 40px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Subtle shadow for a raised look */
+    transition: transform 0.2s, box-shadow 0.2s;  /* Transition for hover effect */
+        z-index: 3;
+
+}
+
+/* Add hover effect to make the button responsive on hover */
+.wide-button:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Optionally, add an active state to give a pressed-down effect */
+.wide-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 0px;
+    z-index: 3;
 }
 
 .button-container a {
-    background-color: #333;
+    display: block;
+    background-color: rgba(67, 129, 98, 0.35);
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    text-align: center;
+    padding: 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    z-index: 3;          /* set a higher z-index for the button */
+    position: relative;  /* add position property */
+     transition: transform 0.2s, box-shadow 0.2s;  /* Transition for hover effect */
+        z-index: 3;
 }
 
-.news-feed-container {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
-.news-feed {
-    overflow: hidden;
-    max-height: 300px;
-    position: relative;
-}
-
-.news-feed ul {
-    position: absolute;
-    white-space: nowrap;
-}
-
-.news-feed li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-/* Change anchor styles on hover */
-a:hover {
-    opacity: 0.8;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 600px) {
-    .button-container {
-        flex-direction: column;
-    }
-}

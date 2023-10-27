@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/webpage/templates/forgot_password.html" afterDir="false" />
+    <list default="true" id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="files idk">
+      <change afterPath="$PROJECT_DIR$/webpage/static/BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpage/static/f2203c0e403286947dcf80815b656236fec71e88.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpage/templates/my_recipes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/capstone/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpage/static/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/static/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpage/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/views.py" afterDir="false" />
@@ -21,6 +29,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -33,17 +44,23 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2XBJe4BDiQhde3lWcOGcwjLLXTi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "C:/Users/Estelle/PycharmProjects/djangoProject/MealPlannerApp/webpage/static",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Estelle\PycharmProjects\djangoProject\MealPlannerApp\webpage\static" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MealPlannerApp/webpage/templates/home.html" useBuiltInWebServerPort="true">
@@ -101,6 +118,10 @@
   <component name="VcsManagerConfiguration">
     <option name="RELOAD_CONTEXT" value="false" />
     <MESSAGE value="initialized tommy branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="initialized tommy branch" />
+    <MESSAGE value="files idk" />
+    <option name="LAST_COMMIT_MESSAGE" value="files idk" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MealPlannerApp$Test__webpage_stylesheets_images.coverage" NAME="Test: webpage.stylesheets.images Coverage Results" MODIFIED="1697768810238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

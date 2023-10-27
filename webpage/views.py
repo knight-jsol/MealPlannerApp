@@ -24,6 +24,9 @@ def pantry(request):
 def forgot_password(request):
     return render(request, 'forgot_password.html')
 
+def my_recipes(request):
+    return render(request, 'my_recipes.html')
+
 
 # Adds item to pantry
 def add_item(request):
