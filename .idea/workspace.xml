@@ -1,115 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a08a22de-3784-4a3b-953b-66f226038ec0" name="Changes" comment="db connection, basic db outline" />
+    <list default="true" id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/webpage/templates/forgot_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpage/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="de4341e6-99f3-4e64-9992-f1f69e8dbc52" />
-        <option name="url" value="https://github.com/knight-jsol/MealPlannerApp.git" />
-      </UrlAndAccount>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
-  <component name="ProjectId" id="2WMw7brukvRjC5CPnbreSvV5ulE" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2XBJe4BDiQhde3lWcOGcwjLLXTi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
   <component name="RunManager">
-    <configuration name="MealPlannerApp" type="Python.DjangoServer" factoryName="Django server">
-      <module name="MealPlannerApp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
+    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MealPlannerApp/webpage/templates/home.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.home.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a08a22de-3784-4a3b-953b-66f226038ec0" name="Changes" comment="" />
-      <created>1696555592754</created>
+      <changelist id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="" />
+      <created>1698096633555</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1696555592754</updated>
-      <workItem from="1696555594495" duration="7438000" />
-      <workItem from="1696573154509" duration="658000" />
-      <workItem from="1696653016449" duration="599000" />
-      <workItem from="1696909705585" duration="611000" />
-      <workItem from="1697507158463" duration="1282000" />
-      <workItem from="1698097131020" duration="225000" />
-      <workItem from="1698097436304" duration="1229000" />
+      <updated>1698096633555</updated>
+      <workItem from="1698096636208" duration="139000" />
+      <workItem from="1698096890759" duration="1424000" />
+      <workItem from="1698277199155" duration="4714000" />
     </task>
-    <task id="LOCAL-00001" summary="db connection, basic db outline">
-      <created>1696572520696</created>
+    <task id="LOCAL-00001" summary="initialized tommy branch">
+      <created>1698096743118</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1696572520696</updated>
+      <updated>1698096743118</updated>
     </task>
-    <task id="LOCAL-00002" summary="db connection, basic db outline">
-      <created>1696572791904</created>
+    <task id="LOCAL-00002" summary="initialized tommy branch">
+      <created>1698277357817</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1696572791904</updated>
+      <updated>1698277357817</updated>
     </task>
-    <task id="LOCAL-00003" summary="db connection, basic db outline">
-      <created>1696573192070</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1696573192070</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +99,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="db connection, basic db outline" />
-    <option name="LAST_COMMIT_MESSAGE" value="db connection, basic db outline" />
+    <option name="RELOAD_CONTEXT" value="false" />
+    <MESSAGE value="initialized tommy branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="initialized tommy branch" />
   </component>
 </project>

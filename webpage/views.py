@@ -21,6 +21,10 @@ def pantry(request):
     return render(request, 'pantry.html')
 
 
+def forgot_password(request):
+    return render(request, 'forgot_password.html')
+
+
 # Adds item to pantry
 def add_item(request):
     item_name = request.POST.get('item_name', '')
@@ -45,3 +49,7 @@ def clear_pantry(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+def lgoin(request):
+    return render(request, 'login.html')
+
