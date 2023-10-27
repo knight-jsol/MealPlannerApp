@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="files idk">
-      <change afterPath="$PROJECT_DIR$/webpage/static/BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpage/static/f2203c0e403286947dcf80815b656236fec71e88.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpage/templates/my_recipes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capstone/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpage/static/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/static/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpage/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webpage/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="57c8b792-0020-4c47-82ca-17e7c4a40bbd" name="Changes" comment="files idk" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Estelle2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,12 +39,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "C:/Users/Estelle/PycharmProjects/djangoProject/MealPlannerApp/webpage/static",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Estelle/PycharmProjects/djangoProject/MealPlannerApp/webpage/static&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Estelle\PycharmProjects\djangoProject\MealPlannerApp\webpage\static" />
