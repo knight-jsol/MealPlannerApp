@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a28c83e-fd79-4e84-90e6-258b503a7579" name="Changes" comment="fixed css" />
+    <list default="true" id="5a28c83e-fd79-4e84-90e6-258b503a7579" name="Changes" comment="files idk" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697771210588</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="files idk">
+      <option name="closed" value="true" />
+      <created>1698380913461</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698380913461</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +229,8 @@
     <MESSAGE value="css for form" />
     <MESSAGE value="form file" />
     <MESSAGE value="fixed css" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed css" />
+    <MESSAGE value="files idk" />
+    <option name="LAST_COMMIT_MESSAGE" value="files idk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
