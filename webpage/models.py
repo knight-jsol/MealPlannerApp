@@ -19,6 +19,13 @@ class Recipes(models.Model):
     recipe_id = models.IntegerField(primary_key=True)
     recipe_name = models.CharField(max_length=200)
     recipe_desc = models.CharField(max_length=10000)
+    recipe_ingredients = models.CharField(max_length=10000) # Temp value
+    recipe_preptime = models.IntegerField() # Temp value, in minutes
+    recipe_cooktime = models.IntegerField() # Temp value, in minutes
+    recipe_peanut = models.BooleanField(default=False)
+    recipe_Dairy = models.BooleanField(default=False)
+    recipe_vegetarian = models.BooleanField(default=False)
+    recipe_vegan = models.BooleanField(default=False)
     user_id = models.ForeignKey("Users", on_delete=models.CASCADE)
 
 
