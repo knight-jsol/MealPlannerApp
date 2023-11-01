@@ -24,10 +24,15 @@ class Recipes(models.Model):
 
 class Ingredients(models.Model):
     ingredient_id = models.IntegerField(primary_key=True)
-    ingredient_name = models.CharField(max_length=100)
+    food = models.CharField(max_length=100)
+    measure = models.CharField(max_length=100)
+    grams = models.IntegerField()
     calories = models.IntegerField()
-    total_fat = models.IntegerField()
-    # Add anything else you can think of
+    fat = models.IntegerField()
+    sat_fat = models.IntegerField()
+    fiber = models.IntegerField()
+    carbs = models.IntegerField()
+    category = models.CharField(max_length=100)
 
 
 class MeasurementUnits(models.Model):
