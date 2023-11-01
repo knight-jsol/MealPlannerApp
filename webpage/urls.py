@@ -10,4 +10,5 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('clear_pantry/', views.clear_pantry, name='clear_pantry'),
     path('login', views.clear_pantry, name='login'),
+    path('my_recipes', views.my_recipes, name='my_recipes'),
 ]
