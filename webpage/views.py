@@ -1,6 +1,31 @@
 from django.shortcuts import render, HttpResponse
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import PantryItem
+from .forms import LoginForm
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request,
+                                username=cd['username'],
+                                password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Authenticated ' \
+                                        'successfully')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                messages.error(request, 'Invalid login')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def home(request):
@@ -55,7 +80,3 @@ def clear_pantry(request):
 
 def cart(request):
     return render(request, 'cart.html')
-
-
-def lgoin(request):
-    return render(request, 'login.html')
