@@ -5,8 +5,9 @@
 
 <ul>
     {% for item in pantry_items %}
-        <li>{{ item }}</li>
+        <li>{{ item.item_name }} - {{ item.item_amount }}</li>
     {% endfor %}
+
 </ul>
 
 <form action="{% url 'add_item' %}" method="post">
