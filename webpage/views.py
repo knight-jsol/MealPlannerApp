@@ -1,6 +1,5 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect
-from .models import Recipes
 
 def home(request):
     news_feed = [
@@ -15,10 +14,6 @@ def home(request):
 
 def create_recipe(request):
     return render(request, 'create_recipe.html')
-
-def view_recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipes, recipe_id=recipe_id)
-    return render(request, 'view_recipe.html', {'recipe': recipe})
 
 
 def pantry(request):
@@ -60,5 +55,4 @@ def cart(request):
 
 def lgoin(request):
     return render(request, 'login.html')
-
 
