@@ -13,85 +13,28 @@
 
     <h1 class="center-text">Allergy and Dietary Preferences</h1>
 
-    <form>
-        <h2 class="subheading">Select All That Apply</h2>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="peanutAllergy" id="peanutAllergy">
-            <label class="form-check-label" for="peanutAllergy">Peanut Allergy</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="dairyAllergy" id="dairyAllergy">
-            <label class="form-check-label" for="dairyAllergy">Dairy Allergy</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="vegetarian" id="vegetarian">
-            <label class="form-check-label" for="vegetarian">Vegetarian</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="vegan" id="vegan">
-            <label class="form-check-label" for="vegan">Vegan</label>
-        </div>
-
-         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-
-        </form>
+    <form method="post" action="{% url 'create_recipe' %}">
+    {% csrf_token %}
+    {{ allergy_diet_form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
 <br />
 
     <h1 class="center-text">Recipe Information </h1>
 
-    <form style="display: table">
-
-        <div class="form-check" style="display: table-row">
-            <label class="form-text-label" for="recipeName" style="display: table-cell">Recipe Name:</label>
-            <input class="form-text-input" type="text" name="recipeName" id="recipeName" style="display: table-cell">
-        </div>
-
-        <div class="form-check" style="display: table-row">
-            <label class="form-text-label" for="ingredientList" style="display: table-cell">Ingredient List:</label>
-            <input class="form-text-input" type="text" name="ingredientList" id="ingredientList" style="display: table-cell">
-        </div>
-
-        <div class="form-check" style="display: table-row">
-            <label class="form-text-label" for="instructions" style="display: table-cell">Instructions:</label>
-            <input class="form-text-input" type="text" name="instructions" id="instructions" style="display: table-cell">
-        </div>
-
-        <div class="form-check" style="display: table-row">
-            <label class="form-text-label" for="prepTime" style="display: table-cell">Prep Time:</label>
-            <input class="form-text-input" type="text" name="prepTime" id="prepTime" style="display: table-cell">
-        </div>
-
-        <div class="form-check" style="display: table-row">
-            <label class="form-text-label" for="cookTime" style="display: table-cell">Cook Time:</label>
-            <input class="form-text-input" type="text" name="cookTime" id="cookTime" style="display: table-cell">
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
+    <form method="post" action="{% url 'create_recipe' %}">
+    {% csrf_token %}
+    {{ recipe_info_form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
 <br />
 
     <h1 class="center-text">Ingredient List </h1>
-   <form style="display: table">
-       <div class="form-check" >
-           <input class="form-text-input" type="text" name="baseIng" id="baseIng">
-           <div id="ing1"></div>
-           <input type="button" id="btn1" onclick="addIng1();" value="add ingredient" />
-           <div id="ing2"></div>
-           <input type="button" id="btn2" onclick="addIng2();" style="display: none;" value="add ingredient" />
-           <div id="ing3"></div>
-           <input type="button" id="btn3" onclick="addIng3();" style="display: none;" value="add ingredient" />
-           <div id="ing4"></div>
-           <input type="button" id="btn4" onclick="addIng4();" style="display: none;" value="add ingredient" />
-           <div id="ing5"></div>
-           <input type="button" id="btn5" onclick="addIng5();" style="display: none;" value="add ingredient" />
-       </div>
-   </form>
+   <form method="post" action="{% url 'create_recipe' %}">
+    {% csrf_token %}
+    {{ ingredient_list_form.as_p }}
+    <!-- Your JavaScript will handle adding more fields -->
+</form>
     <br />
 
 </div>

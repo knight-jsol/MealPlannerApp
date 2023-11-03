@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import PantryItem
-from .forms import LoginForm
+from .forms import LoginForm, AllergyDietForm, RecipeInformationForm, IngredientListForm
 from django.urls import reverse
 
 
@@ -11,7 +11,6 @@ def login_view(request):
     form = LoginForm(request.POST)
 
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)  # Instantiate the form with posted data
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(request, username=cd['username'], password=cd['password'])
@@ -42,6 +41,15 @@ def home(request):
 
 
 def create_recipe(request):
+    allergy_diet_form = AllergyDietForm()
+    recipe_info_form = RecipeInformationForm()
+    ingredient_list_form = IngredientListForm()
+
+    context = {
+        'allergy_diet_form': allergy_diet_form,
+        'recipe_info_form': recipe_info_form,
+        'ingredient_list_form': ingredient_list_form,
+    }
     return render(request, 'create_recipe.html')
 
 
