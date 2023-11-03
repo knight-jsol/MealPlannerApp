@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LoginView
+from .views import login_view as custom_user_login
 
 urlpatterns = [
-    path("", views.login, name="login"),
+    path("", custom_user_login, name="login_view"),
     path("create_recipe", views.create_recipe, name="create_recipe"),
     path("pantry", views.pantry, name="pantry"),
     path("cart", views.cart, name="cart"),

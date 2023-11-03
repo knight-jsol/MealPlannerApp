@@ -1,30 +1,32 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import PantryItem
 from .forms import LoginForm
+from django.urls import reverse
 
 
-def login(request):
+def login_view(request):
+    form = LoginForm(request.POST)
+
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = LoginForm(data=request.POST)  # Instantiate the form with posted data
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request,
-                                username=cd['username'],
-                                password=cd['password'])
+            user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated ' \
-                                        'successfully')
+                    return redirect(reverse('home'))
                 else:
                     return HttpResponse('Disabled account')
             else:
                 messages.error(request, 'Invalid login')
-    else:
-        form = LoginForm()
+        else:
+            messages.error(request, 'Form data is not valid')
+
+        # Pass the form to the context for both GET and POST requests
     return render(request, 'login.html', {'form': form})
 
 
