@@ -36,15 +36,106 @@
             <label class="form-check-label" for="vegan">Vegan</label>
         </div>
 
+         <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+        </form>
+<br />
+
+    <h1 class="center-text">Recipe Information </h1>
+
+    <form style="display: table">
+
+        <div class="form-check" style="display: table-row">
+            <label class="form-text-label" for="recipeName" style="display: table-cell">Recipe Name:</label>
+            <input class="form-text-input" type="text" name="recipeName" id="recipeName" style="display: table-cell">
+        </div>
+
+        <div class="form-check" style="display: table-row">
+            <label class="form-text-label" for="ingredientList" style="display: table-cell">Ingredient List:</label>
+            <input class="form-text-input" type="text" name="ingredientList" id="ingredientList" style="display: table-cell">
+        </div>
+
+        <div class="form-check" style="display: table-row">
+            <label class="form-text-label" for="instructions" style="display: table-cell">Instructions:</label>
+            <input class="form-text-input" type="text" name="instructions" id="instructions" style="display: table-cell">
+        </div>
+
+        <div class="form-check" style="display: table-row">
+            <label class="form-text-label" for="prepTime" style="display: table-cell">Prep Time:</label>
+            <input class="form-text-input" type="text" name="prepTime" id="prepTime" style="display: table-cell">
+        </div>
+
+        <div class="form-check" style="display: table-row">
+            <label class="form-text-label" for="cookTime" style="display: table-cell">Cook Time:</label>
+            <input class="form-text-input" type="text" name="cookTime" id="cookTime" style="display: table-cell">
+        </div>
+
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
+<br />
+
+    <h1 class="center-text">Ingredient List </h1>
+   <form style="display: table">
+       <div class="form-check" >
+           <input class="form-text-input" type="text" name="baseIng" id="baseIng">
+           <div id="ing1"></div>
+           <input type="button" id="btn1" onclick="addIng1();" value="add ingredient" />
+           <div id="ing2"></div>
+           <input type="button" id="btn2" onclick="addIng2();" style="display: none;" value="add ingredient" />
+           <div id="ing3"></div>
+           <input type="button" id="btn3" onclick="addIng3();" style="display: none;" value="add ingredient" />
+           <div id="ing4"></div>
+           <input type="button" id="btn4" onclick="addIng4();" style="display: none;" value="add ingredient" />
+           <div id="ing5"></div>
+           <input type="button" id="btn5" onclick="addIng5();" style="display: none;" value="add ingredient" />
+       </div>
+   </form>
+    <br />
+
 </div>
 
 <!-- Bootstrap JS (optional) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function addIng1()
+        {
+            document.getElementById("btn1").style.display="none";
+            document.getElementById("btn2").style.display="initial";
+            var div1=document.getElementById("ing1");
+            div1.innerHTML="<input type='text'/>";
+        }
+function addIng2()
+        {
+            document.getElementById("btn2").style.display="none";
+            document.getElementById("btn3").style.display="initial";
+            var div1=document.getElementById("ing2");
+            div1.innerHTML="<input type='text'/>";
+        }
+function addIng3()
+        {
+            document.getElementById("btn3").style.display="none";
+            document.getElementById("btn4").style.display="initial";
+            var div1=document.getElementById("ing3");
+            div1.innerHTML="<input type='text'/>";
+        }
+function addIng4()
+        {
+            document.getElementById("btn4").style.display="none";
+            document.getElementById("btn5").style.display="initial";
+            var div1=document.getElementById("ing4");
+            div1.innerHTML="<input type='text'/>";
+        }
+function addIng5()
+        {
+            document.getElementById("btn5").style.display="none";
+            var div1=document.getElementById("ing5");
+            div1.innerHTML="<input type='text'/>";
+        }
+ </script>
 </body>
 </html>
 {% endblock %}
