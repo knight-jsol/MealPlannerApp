@@ -4,26 +4,30 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import PantryItem
 from .forms import LoginForm, AllergyDietForm, RecipeInformationForm, IngredientListForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 
 
 def login_view(request):
-    form = LoginForm(request.POST)
 
     if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect(reverse('home'))
+                    return redirect('home')
                 else:
                     return HttpResponse('Disabled account')
             else:
                 messages.error(request, 'Invalid login')
         else:
+            print(form.errors)
             messages.error(request, 'Form data is not valid')
+    else:
+        form = LoginForm()
 
         # Pass the form to the context for both GET and POST requests
     return render(request, 'login.html', {'form': form})
