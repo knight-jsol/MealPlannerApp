@@ -1,0 +1,12 @@
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM__Changes_.xml	(revision 1133749d4b82a0bd582f35baaca39fde6039e6ab)
++++ /dev/null	(revision 1133749d4b82a0bd582f35baaca39fde6039e6ab)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM_[Changes]" date="1698277106851" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_25_2023_6_38_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 10/25/2023 6:38 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
