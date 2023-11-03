@@ -57,3 +57,8 @@ class RecipeIngredients(models.Model):
     unit_id = models.ForeignKey("MeasurementUnits", on_delete=models.CASCADE)
     qty_id = models.ForeignKey("MeasurementQty", on_delete=models.CASCADE)
     ingredient_id = models.ForeignKey("Ingredients", on_delete=models.CASCADE)
+
+
+class CartItem(models.Model):
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)

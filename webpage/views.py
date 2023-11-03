@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect
+from .models import CartItem
 
 def home(request):
     news_feed = [
@@ -47,8 +48,26 @@ def clear_pantry(request):
     return response
 
 
+# Next 3 functions are all atrocious code
 def cart(request):
-    return render(request, 'cart.html')
+    cart = request.session.get('cart', {})
+    items = Item.objects.filter(id__in=cart.keys())
+    return render(request, 'cart.html', {'cart': cart, 'items': items})
+
+def add_to_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    cart[item_id] = cart.get(item_id, 0) + 1
+    request.session['cart'] = cart
+    return redirect('cart_detail')
+
+def remove_from_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    if item_id in cart:
+        del cart[item_id]
+    request.session['cart'] = cart
+    return redirect('cart_detail')
+# surely I will replace this before the end of semester :clueless:
+
 
 def lgoin(request):
     return render(request, 'login.html')
