@@ -1,6 +1,12 @@
 from django.db import models
 
 
+class PantryItem(models.Model):
+    user = models.ForeignKey("Users", on_delete=models.CASCADE)
+    item_name = models.CharField(max_length=255)
+    item_amount = models.IntegerField()
+
+
 class Roles(models.Model):
     role_id = models.IntegerField(primary_key=True)
     role_name = models.CharField(max_length=30)
@@ -19,9 +25,9 @@ class Recipes(models.Model):
     recipe_id = models.IntegerField(primary_key=True)
     recipe_name = models.CharField(max_length=200)
     recipe_desc = models.CharField(max_length=10000)
-    recipe_ingredients = models.CharField(max_length=10000) # Temp value
-    recipe_preptime = models.IntegerField() # Temp value, in minutes
-    recipe_cooktime = models.IntegerField() # Temp value, in minutes
+    recipe_ingredients = models.CharField(max_length=10000)  # Temp value
+    recipe_preptime = models.IntegerField()  # Temp value, in minutes
+    recipe_cooktime = models.IntegerField()  # Temp value, in minutes
     recipe_peanut = models.BooleanField(default=False)
     recipe_Dairy = models.BooleanField(default=False)
     recipe_vegetarian = models.BooleanField(default=False)

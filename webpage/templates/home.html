@@ -1,44 +1,22 @@
 {% load static %}
 
 {% block content %}
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+</head>
 
-    <header>
-        <h1>Meal Prep App</h1>
-    </header>
+<header>
+    <h1>Meal Preparation</h1>
+</header>
 
-    <main>
-        <a href="{% url 'create_recipe' %}" class="wide-button">Create a Recipe</a>
-        <div class="button-container">
-            <a href="{% url 'pantry' %}">Pantry</a>
-            <a href="{% url 'cart' %}">Shopping Cart</a>
-            <a href="{% url 'forgot_password' %}">Forgot Password</a>
-        </div>
-
-        <div class="news-feed-container">
-            <div class="news-feed">
-                <ul>
-                    {% for news_item in news_feed %}
-                        <li>{{ news_item }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // JavaScript code for scrolling the news feed
-        var newsFeed = document.querySelector('.news-feed');
-
-        function scrollNews() {
-            newsFeed.scrollTop += 1;
-            if (newsFeed.scrollTop % newsFeed.scrollHeight === 0) {
-                newsFeed.scrollTop = 0;
-            }
-        }
-
-        setInterval(scrollNews, 50);
-    </script>
+<main>
+    <div class="scroll-bg"></div>
+    <a href="{% url 'create_recipe' %}" class="wide-button">Create a Recipe</a>
+    <div class="button-container">
+        <a href="{% url 'pantry' %}">Pantry</a>
+        <a href="{% url 'cart' %}">Shopping Cart</a>
+        <a href="{% url 'my_recipes' %}">My Recipes</a>
+        <a href="{% url 'forgot_password' %}">Forgot Password</a>
+    </div>
+</main>
 {% endblock %}

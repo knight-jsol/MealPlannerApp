@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Saved Recipes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* Add a subtle gradient as a background */
+            background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+            padding: 40px; /* More space around */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px; /* Spacing under the main title */
+        }
+
+        #search-bar {
+            margin: 20px 0 40px; /* Increased bottom margin */
+            text-align: center;
+        }
+
+        #search-bar input[type="text"] {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        .recipe {
+            border: 1px solid #ddd;
+            padding: 30px; /* Increased padding */
+            margin: 20px 0; /* Increased margin */
+            display: flex;
+            justify-content: space-between;
+            transition: box-shadow 0.3s; /* Add a transition */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Add a subtle shadow */
+        }
+
+        .recipe:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Hover effect */
+        }
+
+        .recipe-img {
+            flex-basis: 150px; /* Adjust as needed */
+            margin-right: 20px; /* Increased right margin */
+        }
+
+        .recipe-img img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .recipe-content {
+            flex-grow: 1;
+        }
+
+        .recipe-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px; /* Space between title and details */
+        }
+
+        .detail {
+            margin-right: 20px; /* Increased right margin */
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>My Saved Recipes</h1>
+
+    <div id="search-bar">
+        <input type="text" placeholder="Search for a recipe...">
+    </div>
+
+    <div class="recipe">
+        <div class="recipe-img">
+            <img src="{% static 'BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9.jpg' %}" alt="Recipe Image 1">
+        </div>
+        <div class="recipe-content">
+            <h2>Recipe Name 1</h2>
+            <div class="recipe-details">
+                <span class="detail">Calories: 250</span>
+                <span class="detail">Sugars: 10g</span>
+                <span class="detail">Protein: 20g</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe">
+        <div class="recipe-img">
+            <img src="{% static 'f2203c0e403286947dcf80815b656236fec71e88.jpeg' %}" alt="Recipe Image 2">
+        </div>
+        <div class="recipe-content">
+            <h2>Recipe Name 2</h2>
+            <div class="recipe-details">
+                <span class="detail">Calories: 300</span>
+                <span class="detail">Sugars: 12g</span>
+                <span class="detail">Protein: 15g</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ... Add more recipes as needed ... -->
+
+</body>
+
+</html>
