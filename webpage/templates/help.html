@@ -10,15 +10,22 @@
 </header>
 
 <body test>
-<p>test</p>
     <div class="scroll-bg"></div>
     <select class="wide-button" name="helpChoice" id="helpChoice">
         <option value="0">Select Question</option>
         <option value="1">How do I view my recipes?</option>
     </select>
-    <a href="{% url 'create_recipe' %}" class="wide-button">Create a Recipe</a>
+    <p></p>
     <div class="button-container">
         <a href="{% url 'home' %}">Back Home</a>
     </div>
 </body>
+<script>
+    function msg(x){
+        var stat = document.getElementById("helpChoice")
+        if (stat == 1){
+
+        }
+    }
+</script>
 {% endblock %}
