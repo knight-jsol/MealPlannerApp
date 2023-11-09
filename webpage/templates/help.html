@@ -1,0 +1,24 @@
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
+</head>
+
+<header>
+    <h1>Meal Preparation</h1>
+</header>
+
+<body test>
+<p>test</p>
+    <div class="scroll-bg"></div>
+    <select class="wide-button" name="helpChoice" id="helpChoice">
+        <option value="0">Select Question</option>
+        <option value="1">How do I view my recipes?</option>
+    </select>
+    <a href="{% url 'create_recipe' %}" class="wide-button">Create a Recipe</a>
+    <div class="button-container">
+        <a href="{% url 'home' %}">Back Home</a>
+    </div>
+</body>
+{% endblock %}

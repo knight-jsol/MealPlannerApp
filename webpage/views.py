@@ -67,6 +67,10 @@ def forgot_password(request):
     return render(request, 'forgot_password.html')
 
 
+def help(request):
+    return render(request, 'help.html')
+
+
 def my_recipes(request):
     return render(request, 'my_recipes.html')
 
