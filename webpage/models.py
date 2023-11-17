@@ -2,6 +2,7 @@ from django.db import models
 
 
 class PantryItem(models.Model):
+    image_url = models.URLField(max_length=500, blank=True, null=True)
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
     image = models.ImageField(upload_to='pantry_images/', blank=True, null=True)

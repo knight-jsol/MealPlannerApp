@@ -129,7 +129,11 @@
         {% for item in pantry_items %}
             <li>
                 <div class="pantry-image">
-                    <img src="{% static 'path/to/default-image.jpg' %}" alt="Item Image"> <!-- Placeholder image -->
+                    {% if item.image_url %}
+                        <img src="{{ item.image_url }}" alt="{{ item.name }} Image">
+                    {% else %}
+                        <img src="{% static 'path/to/default-no-image.jpg' %}" alt="No Image Available">
+                    {% endif %}
                 </div>
                 <div>
                     <span class="pantry-item">{{ item.name }}</span>
@@ -141,7 +145,7 @@
         {% endfor %}
     </ul>
 
-    <form action="{% url 'add_pantry_item' %}" method="post">
+    <form action="{% url 'add_pantry_item' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="name" placeholder="Item Name" required>
         <input type="number" name="quantity" placeholder="Quantity" required>

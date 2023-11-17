@@ -12,10 +12,7 @@ from django.views.decorators.http import require_POST
 from .utils import generate_image
 
 
-
-
 def login_view(request):
-
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -69,6 +66,7 @@ def forgot_password(request):
 def my_recipes(request):
     return render(request, 'my_recipes.html')
 
+
 def profile(request):
     return render(request, 'profile.html')
 
@@ -76,26 +74,34 @@ def profile(request):
 # Adds item to pantry
 
 
+# views.py
+
+
 def add_pantry_item(request):
     if request.method == 'POST':
-        form = PantryItemForm(request.POST)
+        form = PantryItemForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('add_pantry_item')  # Redirect to the same page to display the updated list
+            new_item = form.save(commit=False)
+            # Call the updated function to generate the image URL
+            image_url = generate_image(new_item.name)
+            if image_url:
+                # Assuming your PantryItem model has a field to store the image URL
+                new_item.image_url = image_url  # Make sure 'image_url' is a field in your PantryItem model
+
+            new_item.save()
+            return redirect('add_pantry_item')  # Adjust the redirect as needed
 
     else:
         form = PantryItemForm()
 
-    pantry_items = PantryItem.objects.all()  # Fetch all pantry items
+    pantry_items = PantryItem.objects.all()
     return render(request, 'pantry.html', {'form': form, 'pantry_items': pantry_items})
-
 
 
 # Clears the pantry
 def clear_pantry(request):
     PantryItem.objects.all().delete()  # This deletes all PantryItem objects from the database
     return redirect('add_pantry_item')  # Redirect back to the pantry list page
-
 
 
 def cart(request):
