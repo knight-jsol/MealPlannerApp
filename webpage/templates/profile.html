@@ -1,0 +1,87 @@
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+</head>
+
+<header>
+    <h1>My Profile</h1>
+</header>
+
+<main>
+    <div class="scroll-bg"></div>
+    <div class="button-container">
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px" id="profilePicture" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        <input type="file" id="profileUpload" style="display: none;" onchange="loadFile(event)">
+                        <button onclick="document.getElementById('profileUpload').click()" class="btn btn-primary">Change Picture</button>
+                        <span class="font-weight-bold"></span>
+                        <span class="text-black-50"></span>
+                    </div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <!-- Profile settings form -->
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label class="labels">Name</label>
+                                <input type="text" class="form-control" placeholder="first name" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Surname</label>
+                                <input type="text" class="form-control" value="" placeholder="surname">
+                            </div>
+                            <!-- Additional inputs -->
+                            <div class="form-group">
+                                <label class="labels">Bio</label>
+                                <textarea class="form-control" placeholder="A short bio about yourself"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Website</label>
+                                <input type="text" class="form-control" placeholder="https://yourwebsite.com" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Twitter</label>
+                                <input type="text" class="form-control" placeholder="Twitter handle" value="">
+                            </div>
+                            <!-- ... other profile inputs ... -->
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Experience section -->
+                    <div class="p-3 py-5">
+                        <!-- ... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('profilePicture');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // Free memory
+        }
+    };
+
+    // Handle form submission
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        // You can add your logic to save the profile data here
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+body {
+      background-color: #E8BA9B;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8;
+}
+
+.profile-button {
+    color: black;
+    box-shadow: none;
+    border: none;
+}
+
+.profile-button:hover {
+    color: black;
+}
+
+.profile-button:focus {
+    color: black;
+    box-shadow: none;
+}
+
+.profile-button:active {
+    color: black;
+    box-shadow: none;
+}
+
+.back:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.labels {
+    font-size: 11px;
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8;
+}
+
+.input-group {
+    width: 50%; /* Adjust as needed */
+    margin-bottom: 15px;
+}
+.form-group {
+    display: block;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.labels {
+    width: 25%; /* Set label width to 25% of the form group */
+    margin-right: 10px; /* Add some space between label and input */
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left; /* Align text to right for a neat look */
+}
+
+.form-control {
+    width: 25%; /* Set input width to 75% to fill the rest of the space */
+    height: 35px;
+    padding: 6px 12px;
+}

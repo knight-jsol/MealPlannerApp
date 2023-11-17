@@ -6,6 +6,12 @@ from .models import PantryItem
 from .forms import LoginForm, AllergyDietForm, RecipeInformationForm, IngredientListForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
+from django.shortcuts import render, redirect
+from .forms import PantryItemForm
+from django.views.decorators.http import require_POST
+from .utils import generate_image
+
+
 
 
 def login_view(request):
@@ -34,14 +40,7 @@ def login_view(request):
 
 
 def home(request):
-    news_feed = [
-        "News Item 1",
-        "News Item 2",
-        "News Item 3",
-        # Add more news items as needed
-    ]
-
-    return render(request, 'home.html', {'news_feed': news_feed})
+    return render(request, 'home.html')  # Make sure 'home.html' is the template for the home page
 
 
 def create_recipe(request):
@@ -70,25 +69,32 @@ def forgot_password(request):
 def my_recipes(request):
     return render(request, 'my_recipes.html')
 
+def profile(request):
+    return render(request, 'profile.html')
+
 
 # Adds item to pantry
-def add_item(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        item_name = request.POST.get('item_name')
-        item_amount = request.POST.get('item_amount')
 
-        if item_name and item_amount:
-            pantry_item = PantryItem(user=request.user, item_name=item_name, item_amount=item_amount)
-            pantry_item.save()
 
-    return HttpResponseRedirect('/pantry')
+def add_pantry_item(request):
+    if request.method == 'POST':
+        form = PantryItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_pantry_item')  # Redirect to the same page to display the updated list
+
+    else:
+        form = PantryItemForm()
+
+    pantry_items = PantryItem.objects.all()  # Fetch all pantry items
+    return render(request, 'pantry.html', {'form': form, 'pantry_items': pantry_items})
+
 
 
 # Clears the pantry
 def clear_pantry(request):
-    if request.user.is_authenticated:
-        PantryItem.objects.filter(user=request.user).delete()
-    return HttpResponseRedirect('/pantry')
+    PantryItem.objects.all().delete()  # This deletes all PantryItem objects from the database
+    return redirect('add_pantry_item')  # Redirect back to the pantry list page
 
 
 
