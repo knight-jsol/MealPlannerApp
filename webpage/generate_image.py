@@ -1,6 +1,6 @@
 # import requests
 #
-# api_key = "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"
+# api_key = "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"
 # endpoint = "https://api.openai.com/v1/images/generations"
 #
 # headers = {

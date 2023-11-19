@@ -10,6 +10,8 @@ from django.shortcuts import render, redirect
 from .forms import PantryItemForm
 from django.views.decorators.http import require_POST
 from .utils import generate_image
+from django.shortcuts import get_object_or_404
+
 
 
 def login_view(request):
@@ -55,8 +57,7 @@ def create_recipe(request):
 
 def pantry(request):
     pantry_items = PantryItem.objects.all()
-    context = {'pantry_items': pantry_items}
-    return render(request, 'pantry.html')
+    return render(request, 'pantry.html', {'pantry_items': pantry_items})
 
 
 def forgot_password(request):
@@ -102,6 +103,20 @@ def add_pantry_item(request):
 def clear_pantry(request):
     PantryItem.objects.all().delete()  # This deletes all PantryItem objects from the database
     return redirect('add_pantry_item')  # Redirect back to the pantry list page
+
+def adjust_quantity(request, item_id):
+    item = get_object_or_404(PantryItem, id=item_id)
+    if request.method == 'POST':
+        item.quantity = request.POST.get('quantity')
+        item.save()
+        return redirect('pantry')  # Redirect to the pantry page
+    # Handle case for GET or other methods if needed
+
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(PantryItem, id=item_id)
+        item.delete()
+        return redirect('pantry')  # Redirect to the pantry page
 
 
 def cart(request):

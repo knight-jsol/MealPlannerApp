@@ -104,14 +104,55 @@
             border: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            background-color: #f0f0f0;
+            background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
             transition: background-color 0.3s;
         }
 
         form input[type="submit"]:hover {
             background-color: #e0e0e0;
         }
-    </style>
+             .delete-button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: red;
+        font-size: 16px;
+        padding: 0 5px;
+    }
+    .quantity-form {
+        display: inline-block;
+    }
+    .quantity-form input[type="number"] {
+        width: 50px;
+        margin-right: 5px;
+    }
+    .pantry-item-container {
+        background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+       .quantity-form input[type="number"] {
+        width: 50px;
+        margin-right: 5px;
+        background-color: #FCE3D8; /* Set the background color to #FCE3D8 */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .quantity-form input[type="submit"] {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+        transition: background-color 0.3s;
+    }
+</style>
 </head>
 
 <body>
@@ -125,20 +166,36 @@
 
     <h1>Pantry</h1>
 
-    <ul class="pantry-list">
+    <ul class="pantry-list" style="list-style: none; padding: 0;">
         {% for item in pantry_items %}
-            <li>
-                <div class="pantry-image">
+             <li class="pantry-item-container">
+                <!-- Image Display -->
+                <div class="pantry-image" style="flex: 0 0 100px; margin-right: 20px;">
                     {% if item.image_url %}
-                        <img src="{{ item.image_url }}" alt="{{ item.name }} Image">
+                        <img src="{{ item.image_url }}" alt="{{ item.name }} Image" style="max-width: 100%; height: auto; border-radius: 10px;">
                     {% else %}
-                        <img src="{% static 'path/to/default-no-image.jpg' %}" alt="No Image Available">
+                        <img src="{% static 'path/to/default-no-image.jpg' %}" alt="No Image Available" style="max-width: 100%; height: auto; border-radius: 10px;">
                     {% endif %}
                 </div>
-                <div>
-                    <span class="pantry-item">{{ item.name }}</span>
-                    <span class="pantry-quantity">Quantity: {{ item.quantity }}</span>
+
+                <!-- Item Name and Quantity Display -->
+                <div style="flex-grow: 1; margin-right: 10px;">
+                    <span class="pantry-item" style="font-weight: bold;">{{ item.name }}</span>
+                    <span class="pantry-quantity" style="color: #555;">Qty: {{ item.quantity }}</span>
                 </div>
+
+                <!-- Quantity Adjustment Form -->
+                <form class="quantity-form" action="{% url 'adjust_quantity' item.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="0">
+                    <input type="submit" value="Update">
+                </form>
+
+                <!-- Delete Button -->
+                <form action="{% url 'delete_item' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">X</button>
+                </form>
             </li>
         {% empty %}
             <li>No items in the pantry.</li>
