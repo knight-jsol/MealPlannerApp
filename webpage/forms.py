@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
+from .models import Recipes, Ingredients, MeasurementUnits, MeasurementQty
 
 
 class LoginForm(AuthenticationForm):
@@ -16,22 +16,17 @@ class LoginForm(AuthenticationForm):
     )
 
 
-class AllergyDietForm(forms.Form):
-    peanut_allergy = forms.BooleanField(required=False)
-    dairy_allergy = forms.BooleanField(required=False)
-    vegetarian = forms.BooleanField(required=False)
-    vegan = forms.BooleanField(required=False)
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipes
+        fields = ['recipe_name', 'recipe_desc', 'recipe_preptime', 'recipe_cooktime',
+                  'recipe_peanut', 'recipe_Dairy', 'recipe_vegetarian', 'recipe_vegan']
+        labels = {'recipe_name': 'Recipe Name', 'recipe_desc': 'Cooking Instructions', 'recipe_preptime': 'Prep Time',
+                  'recipe_cooktime': 'Cook Time', 'recipe_peanut': 'Contains Peanuts', 'recipe_Dairy': 'Contains Dairy',
+                  'recipe_vegetarian': 'Vegetarian', 'recipe_vegan': 'Vegan'}
 
 
-class RecipeInformationForm(forms.Form):
-    recipe_name = forms.CharField(max_length=100)
-    ingredient_list = forms.CharField(max_length=500)
-    instructions = forms.CharField(max_length=1000)
-    prep_time = forms.CharField(max_length=50)
-    cook_time = forms.CharField(max_length=50)
-
-
-class IngredientListForm(forms.Form):
-    base_ing = forms.CharField(max_length=100)
-    # You can add more ingredient fields if necessary
-    # However, dynamic addition of fields should be handled by JavaScript in the template
+class RecipeIngredientForm(forms.Form):
+    ingredient_name = forms.ModelChoiceField(queryset=Ingredients.objects.all())
+    unit = forms.ModelChoiceField(queryset=MeasurementUnits.objects.all())
+    quantity = forms.ModelChoiceField(queryset=MeasurementQty.objects.all())
