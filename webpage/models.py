@@ -6,6 +6,10 @@ class PantryItem(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
     image = models.ImageField(upload_to='pantry_images/', blank=True, null=True)
+    protein = models.FloatField(null=True, blank=True)
+    cholesterol = models.FloatField(null=True, blank=True)
+    energy = models.FloatField(null=True, blank=True)
+    carbohydrate = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.quantity}"

@@ -190,6 +190,12 @@
                     <input type="number" name="quantity" value="{{ item.quantity }}" min="0">
                     <input type="submit" value="Update">
                 </form>
+                 <div class="nutritional-info">
+                    <p>Protein: {{ item.protein }}g</p>
+                    <p>Cholesterol: {{ item.cholesterol }}mg</p>
+                    <p>Energy: {{ item.energy }}kcal</p>
+                    <p>Carbohydrate: {{ item.carbohydrate }}g</p>
+                </div>
 
                 <!-- Delete Button -->
                 <form action="{% url 'delete_item' item.id %}" method="post">

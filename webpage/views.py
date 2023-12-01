@@ -11,6 +11,9 @@ from .forms import PantryItemForm
 from django.views.decorators.http import require_POST
 from .utils import generate_image
 from django.shortcuts import get_object_or_404
+from .nutrition_lookup import get_nutritional_data
+
+
 
 
 
@@ -83,21 +86,31 @@ def add_pantry_item(request):
         form = PantryItemForm(request.POST, request.FILES)
         if form.is_valid():
             new_item = form.save(commit=False)
-            # Call the updated function to generate the image URL
+
+            # Generate the image URL
             image_url = generate_image(new_item.name)
             if image_url:
-                # Assuming your PantryItem model has a field to store the image URL
-                new_item.image_url = image_url  # Make sure 'image_url' is a field in your PantryItem model
+                new_item.image_url = image_url
+
+            # Get the nutritional data
+            api_key = "V7DRp5nywS4bKNSbRdxkWE4niwwYSXJhYDTGY2oZ"
+            food_item_name = new_item.name
+            nutritional_data = get_nutritional_data(food_item_name, api_key)
+
+            # Set the nutritional data fields
+            new_item.protein = nutritional_data.get('Protein')
+            new_item.cholesterol = nutritional_data.get('Cholesterol')
+            new_item.energy = nutritional_data.get('Energy')
+            new_item.carbohydrate = nutritional_data.get('Carbohydrate, by difference')
 
             new_item.save()
-            return redirect('add_pantry_item')  # Adjust the redirect as needed
+            return redirect('add_pantry_item')
 
     else:
         form = PantryItemForm()
 
     pantry_items = PantryItem.objects.all()
     return render(request, 'pantry.html', {'form': form, 'pantry_items': pantry_items})
-
 
 # Clears the pantry
 def clear_pantry(request):
