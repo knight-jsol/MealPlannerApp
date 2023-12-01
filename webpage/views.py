@@ -1,3 +1,5 @@
+# views.py
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -12,9 +14,8 @@ from django.views.decorators.http import require_POST
 from .utils import generate_image
 from django.shortcuts import get_object_or_404
 from .nutrition_lookup import get_nutritional_data
-
-
-
+from .forms import UserProfileForm
+from .models import UserProfile
 
 
 def login_view(request):
@@ -112,10 +113,12 @@ def add_pantry_item(request):
     pantry_items = PantryItem.objects.all()
     return render(request, 'pantry.html', {'form': form, 'pantry_items': pantry_items})
 
+
 # Clears the pantry
 def clear_pantry(request):
     PantryItem.objects.all().delete()  # This deletes all PantryItem objects from the database
     return redirect('add_pantry_item')  # Redirect back to the pantry list page
+
 
 def adjust_quantity(request, item_id):
     item = get_object_or_404(PantryItem, id=item_id)
@@ -124,6 +127,7 @@ def adjust_quantity(request, item_id):
         item.save()
         return redirect('pantry')  # Redirect to the pantry page
     # Handle case for GET or other methods if needed
+
 
 def delete_item(request, item_id):
     if request.method == 'POST':
@@ -134,3 +138,23 @@ def delete_item(request, item_id):
 
 def cart(request):
     return render(request, 'cart.html')
+
+
+@login_required
+def profile_edit(request):
+    try:
+        # Attempt to fetch the existing profile for the current user
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        # If it does not exist, create a new instance without saving it to the database yet
+        user_profile = UserProfile(user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_edit')  # Redirect to the desired page after saving
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'profile.html', {'form': form})

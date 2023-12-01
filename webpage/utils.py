@@ -1,3 +1,4 @@
+#utils.py
 import openai
 import requests
 import os
@@ -8,7 +9,7 @@ import numpy as np
 from PIL import Image
 
 def generate_image(prompt):
-    api_key = "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"
+    api_key = "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"
     endpoint = "https://api.openai.com/v1/images/generations"
 
     headers = {

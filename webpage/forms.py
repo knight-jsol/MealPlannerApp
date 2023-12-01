@@ -1,3 +1,4 @@
+#forms.py
 from io import BytesIO
 
 from django import forms
@@ -8,7 +9,7 @@ from .utils import generate_image  # Assuming you have a generate_image function
 from urllib.request import urlopen
 from django.core.files.base import ContentFile
 from django.core.files import File
-
+from .models import UserProfile
 
 
 class LoginForm(AuthenticationForm):
@@ -42,6 +43,7 @@ class PantryItemForm(forms.ModelForm):
             pantry_item.save()
         return pantry_item
 
+
 class AllergyDietForm(forms.Form):
     peanut_allergy = forms.BooleanField(required=False)
     dairy_allergy = forms.BooleanField(required=False)
@@ -61,3 +63,9 @@ class IngredientListForm(forms.Form):
     base_ing = forms.CharField(max_length=100)
     # You can add more ingredient fields if necessary
     # However, dynamic addition of fields should be handled by JavaScript in the template
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['full_name', 'email', 'phone', 'mobile', 'address']

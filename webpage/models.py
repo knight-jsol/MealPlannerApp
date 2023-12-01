@@ -1,4 +1,8 @@
+#models.py
+from django.contrib.auth.models import User
 from django.db import models
+
+from capstone import settings
 
 
 class PantryItem(models.Model):
@@ -71,3 +75,12 @@ class RecipeIngredients(models.Model):
     unit_id = models.ForeignKey("MeasurementUnits", on_delete=models.CASCADE)
     qty_id = models.ForeignKey("MeasurementQty", on_delete=models.CASCADE)
     ingredient_id = models.ForeignKey("Ingredients", on_delete=models.CASCADE)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    mobile = models.CharField(max_length=20)
+    address = models.TextField()
