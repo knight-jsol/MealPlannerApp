@@ -1,4 +1,6 @@
 #urls.py
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -16,4 +18,4 @@ urlpatterns = [
     path('adjust_quantity/<int:item_id>/', views.adjust_quantity, name='adjust_quantity'),
     path('delete_item/<int:item_id>/', views.delete_item, name='delete_item'),
     path('profile_edit/', views.profile_edit, name='profile_edit'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

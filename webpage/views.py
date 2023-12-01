@@ -73,7 +73,16 @@ def my_recipes(request):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    try:
+        # Fetch the user profile associated with the current user
+        user_profile = UserProfile.objects.get(user=request.user)
+        full_name = user_profile.full_name
+    except UserProfile.DoesNotExist:
+        # If the user profile does not exist, set full_name to None or a default value
+        full_name = None
+
+    return render(request, 'profile.html', {'full_name': full_name})
+
 
 
 # Adds item to pantry
@@ -143,17 +152,15 @@ def cart(request):
 @login_required
 def profile_edit(request):
     try:
-        # Attempt to fetch the existing profile for the current user
         user_profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
-        # If it does not exist, create a new instance without saving it to the database yet
         user_profile = UserProfile(user=request.user)
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
-            return redirect('profile_edit')  # Redirect to the desired page after saving
+            return redirect('profile_edit')
     else:
         form = UserProfileForm(instance=user_profile)
 

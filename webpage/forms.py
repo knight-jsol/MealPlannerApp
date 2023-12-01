@@ -68,4 +68,4 @@ class IngredientListForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['full_name', 'email', 'phone', 'mobile', 'address']
+        fields = ['full_name', 'email', 'phone', 'mobile', 'address', 'profile_image']
