@@ -1,9 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import PantryItem, CartItem
-from .forms import LoginForm
+from .models import *
+from .forms import LoginForm, JulianDateForm
 
 
 def login(request):
@@ -71,7 +71,8 @@ def add_item(request):
 
 
 # Clears the pantry
-def clear_pantry(request):    if request.user.is_authenticated:
+def clear_pantry(request):    
+    if request.user.is_authenticated:
         PantryItem.objects.filter(user=request.user).delete()
     return HttpResponseRedirect('/pantry')
 
@@ -100,3 +101,40 @@ def remove_from_cart(request, item_id):
 def lgoin(request):
     return render(request, 'login.html')
 
+def calendar(request):
+    if request.method == 'POST' and ('breakfast_recipe_id' in request.POST or 
+        'dinner_recipe_id' in request.POST or 'lunch_recipe_id' in request.POST):
+        # This block handles the recipe update form
+        julian_date = request.POST.get('julianDay')
+        tracker = get_object_or_404(CalendarTracker, julianDay=julian_date, year=2023)
+
+        breakfast_id = request.POST.get('breakfast_recipe_id')
+        lunch_id = request.POST.get('lunch_recipe_id')
+        dinner_id = request.POST.get('dinner_recipe_id')
+
+        if breakfast_id:
+            tracker.breakfast_recipe = Recipes.objects.get(pk=breakfast_id)
+        if lunch_id:
+            tracker.lunch_recipe = Recipes.objects.get(pk=lunch_id)
+        if dinner_id:
+            tracker.dinner_recipe = Recipes.objects.get(pk=dinner_id)
+        
+        tracker.save()
+        return render(request, 'calendar.html', {'tracker': tracker})
+    elif request.method == 'POST':
+        form = JulianDateForm(request.POST)
+        if form.is_valid():
+            julian_date = form.cleaned_data['julian_date']
+            tracker, created = CalendarTracker.objects.get_or_create(julianDay=julian_date, defaults={'year': 2023})
+            if created:
+                # Perform additional actions if needed when a new record is created
+                pass
+
+            return render(request, 'calendar.html', {'tracker': tracker})
+    else:
+        form = JulianDateForm()
+
+    return render(request, 'calendar_form.html', {'form': form})
+    
+
+    

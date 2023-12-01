@@ -14,3 +14,7 @@ class LoginForm(AuthenticationForm):
         label="Password",
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'name': 'password'})
     )
+
+
+class JulianDateForm(forms.Form):
+    julian_date = forms.IntegerField(label='Julian Date', min_value=0)
