@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #FCE3D8;;
     margin: 0;
     padding: 20px;
 }
@@ -16,12 +16,12 @@ h1, h2 {
 .subheading {
     font-size: 16px;
     text-align: center;
-    color: #555;
+    color: #FCE3D8;
     margin-bottom: 25px; /* Added some space below the subheading for better spacing */
 }
 
 form {
-    background-color: #eaf6fd;
+    background-color: #FCE3D8;
     border-radius: 10px;
     padding: 25px;  /* Increased padding for a bit more spacious look */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);

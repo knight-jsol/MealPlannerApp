@@ -1,11 +1,21 @@
+#models.py
+from django.contrib.auth.models import User
 from django.db import models
-from django.conf import settings
+from capstone import settings
 
 
 class PantryItem(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    item_name = models.ForeignKey("Ingredients", on_delete=models.CASCADE)
-    item_amount = models.IntegerField()
+    image_url = models.URLField(max_length=500, blank=True, null=True)
+    name = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    image = models.ImageField(upload_to='pantry_images/', blank=True, null=True)
+    protein = models.FloatField(null=True, blank=True)
+    cholesterol = models.FloatField(null=True, blank=True)
+    energy = models.FloatField(null=True, blank=True)
+    carbohydrate = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.quantity}"
 
 
 class Roles(models.Model):
@@ -67,3 +77,13 @@ class RecipeIngredients(models.Model):
     unit_id = models.ForeignKey("MeasurementUnits", on_delete=models.CASCADE)
     qty_id = models.ForeignKey("MeasurementQty", on_delete=models.CASCADE)
     ingredient_id = models.ForeignKey("Ingredients", on_delete=models.CASCADE)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    mobile = models.CharField(max_length=20)
+    address = models.TextField()
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)

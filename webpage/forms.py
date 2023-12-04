@@ -1,6 +1,15 @@
+#forms.py
+from io import BytesIO
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Recipes, Ingredients, MeasurementUnits, MeasurementQty
+from django.contrib.auth.models import User
+from .models import *
+from .utils import generate_image  # Assuming you have a generate_image function in utils.py
+from urllib.request import urlopen
+from django.core.files.base import ContentFile
+from django.core.files import File
+from .models import UserProfile
 
 
 class LoginForm(AuthenticationForm):
@@ -14,6 +23,25 @@ class LoginForm(AuthenticationForm):
         label="Password",
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'name': 'password'})
     )
+
+
+class PantryItemForm(forms.ModelForm):
+    class Meta:
+        model = PantryItem
+        fields = ['name', 'quantity']
+
+    def save(self, commit=True):
+        pantry_item = super().save(commit=False)
+        image_data = generate_image(pantry_item.name)
+        if image_data and 'image_url' in image_data:  # Replace 'image_url' with the actual key
+            image_url = image_data['image_url']
+            response = urlopen(image_url)
+            io = BytesIO(response.read())
+            pantry_item.image.save(f"{pantry_item.name}.jpg", File(io), save=False)
+
+        if commit:
+            pantry_item.save()
+        return pantry_item
 
 
 class RecipeForm(forms.ModelForm):
@@ -30,3 +58,9 @@ class RecipeIngredientForm(forms.Form):
     ingredient_name = forms.ModelChoiceField(queryset=Ingredients.objects.all())
     unit = forms.ModelChoiceField(queryset=MeasurementUnits.objects.all())
     quantity = forms.ModelChoiceField(queryset=MeasurementQty.objects.all())
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['full_name', 'email', 'phone', 'mobile', 'address', 'profile_image']

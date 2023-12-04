@@ -1,3 +1,5 @@
+# views.py
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -7,6 +9,15 @@ from .models import PantryItem, Ingredients, RecipeIngredients, Recipes
 from .forms import LoginForm, RecipeForm, RecipeIngredientForm
 from django.forms import formset_factory
 from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse
+from django.shortcuts import render, redirect
+from .forms import PantryItemForm
+from django.views.decorators.http import require_POST
+from .utils import generate_image
+from django.shortcuts import get_object_or_404
+from .nutrition_lookup import get_nutritional_data
+from .forms import UserProfileForm
+from .models import UserProfile
 
 
 def login_view(request):
@@ -34,14 +45,7 @@ def login_view(request):
 
 
 def home(request):
-    news_feed = [
-        "News Item 1",
-        "News Item 2",
-        "News Item 3",
-        # Add more news items as needed
-    ]
-
-    return render(request, 'home.html', {'news_feed': news_feed})
+    return render(request, 'home.html')  # Make sure 'home.html' is the template for the home page
 
 
 def create_recipe(request):
@@ -107,8 +111,7 @@ def add_recipe(request):
 
 def pantry(request):
     pantry_items = PantryItem.objects.all()
-    context = {'pantry_items': pantry_items}
-    return render(request, 'pantry.html')
+    return render(request, 'pantry.html', {'pantry_items': pantry_items})
 
 
 def forgot_password(request):
@@ -123,25 +126,96 @@ def my_recipes(request):
     return render(request, 'my_recipes.html')
 
 
+def profile(request):
+    try:
+        # Fetch the user profile associated with the current user
+        user_profile = UserProfile.objects.get(user=request.user)
+        full_name = user_profile.full_name
+    except UserProfile.DoesNotExist:
+        # If the user profile does not exist, set full_name to None or a default value
+        full_name = None
+
+    return render(request, 'profile.html', {'full_name': full_name})
+
+
+
 # Adds item to pantry
-def add_item(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        item_name = request.POST.get('item_name')
-        item_amount = request.POST.get('item_amount')
 
-        if item_name and item_amount:
-            pantry_item = PantryItem(user=request.user, item_name=item_name, item_amount=item_amount)
-            pantry_item.save()
 
-    return HttpResponseRedirect('/pantry')
+# views.py
+
+
+def add_pantry_item(request):
+    if request.method == 'POST':
+        form = PantryItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_item = form.save(commit=False)
+
+            # Generate the image URL
+            image_url = generate_image(new_item.name)
+            if image_url:
+                new_item.image_url = image_url
+
+            # Get the nutritional data
+            api_key = "V7DRp5nywS4bKNSbRdxkWE4niwwYSXJhYDTGY2oZ"
+            food_item_name = new_item.name
+            nutritional_data = get_nutritional_data(food_item_name, api_key)
+
+            # Set the nutritional data fields
+            new_item.protein = nutritional_data.get('Protein')
+            new_item.cholesterol = nutritional_data.get('Cholesterol')
+            new_item.energy = nutritional_data.get('Energy')
+            new_item.carbohydrate = nutritional_data.get('Carbohydrate, by difference')
+
+            new_item.save()
+            return redirect('add_pantry_item')
+
+    else:
+        form = PantryItemForm()
+
+    pantry_items = PantryItem.objects.all()
+    return render(request, 'pantry.html', {'form': form, 'pantry_items': pantry_items})
 
 
 # Clears the pantry
 def clear_pantry(request):
-    if request.user.is_authenticated:
-        PantryItem.objects.filter(user=request.user).delete()
-    return HttpResponseRedirect('/pantry')
+    PantryItem.objects.all().delete()  # This deletes all PantryItem objects from the database
+    return redirect('add_pantry_item')  # Redirect back to the pantry list page
+
+
+def adjust_quantity(request, item_id):
+    item = get_object_or_404(PantryItem, id=item_id)
+    if request.method == 'POST':
+        item.quantity = request.POST.get('quantity')
+        item.save()
+        return redirect('pantry')  # Redirect to the pantry page
+    # Handle case for GET or other methods if needed
+
+
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(PantryItem, id=item_id)
+        item.delete()
+        return redirect('pantry')  # Redirect to the pantry page
 
 
 def cart(request):
     return render(request, 'cart.html')
+
+
+@login_required
+def profile_edit(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        user_profile = UserProfile(user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_edit')
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'profile.html', {'form': form})

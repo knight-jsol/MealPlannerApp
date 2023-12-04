@@ -1,24 +1,224 @@
-{% extends 'base.html' %}
+{% load static %}
 
-{% block content %}
-<h1>Pantry</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<ul>
-    {% for item in pantry_items %}
-        <li>{{ item.item_name }} - {{ item.item_amount }}</li>
-    {% endfor %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+            padding: 40px;
+        }
+        nav {
+            background-color: #f2f2f2;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-</ul>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-<form action="{% url 'add_item' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="item_name" placeholder="Item Name" required>
-    <input type="number" name="item_amount" placeholder="Item Amount" required>
-    <input type="submit" value="Add Item">
-</form>
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
 
-<form action="{% url 'clear_pantry' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Clear Pantry">
-</form>
-{% endblock %}
+        nav ul li button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .pantry-list {
+            margin: 20px auto;
+            padding: 0;
+            max-width: 600px;
+        }
+
+        .pantry-list li {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            transition: box-shadow 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .pantry-list li:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pantry-item {
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .pantry-quantity {
+            color: #555;
+            margin-left: 20px;
+        }
+
+        .pantry-image {
+            flex-basis: 100px; /* Adjust as needed */
+            margin-right: 20px;
+        }
+
+        .pantry-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        form input[type="text"], form input[type="number"] {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 10px 20px;
+        }
+
+        form input[type="submit"] {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+            transition: background-color 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #e0e0e0;
+        }
+             .delete-button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: red;
+        font-size: 16px;
+        padding: 0 5px;
+    }
+    .quantity-form {
+        display: inline-block;
+    }
+    .quantity-form input[type="number"] {
+        width: 50px;
+        margin-right: 5px;
+    }
+    .pantry-item-container {
+        background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+       .quantity-form input[type="number"] {
+        width: 50px;
+        margin-right: 5px;
+        background-color: #FCE3D8; /* Set the background color to #FCE3D8 */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .quantity-form input[type="submit"] {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
+        transition: background-color 0.3s;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><button onclick="history.back()">Go Back</button></li>
+            <!-- Other navigation items can be added here if needed -->
+        </ul>
+    </nav>
+
+    <h1>Pantry</h1>
+
+    <ul class="pantry-list" style="list-style: none; padding: 0;">
+        {% for item in pantry_items %}
+             <li class="pantry-item-container">
+                <!-- Image Display -->
+                <div class="pantry-image" style="flex: 0 0 100px; margin-right: 20px;">
+                    {% if item.image_url %}
+                        <img src="{{ item.image_url }}" alt="{{ item.name }} Image" style="max-width: 100%; height: auto; border-radius: 10px;">
+                    {% else %}
+                        <img src="{% static 'path/to/default-no-image.jpg' %}" alt="No Image Available" style="max-width: 100%; height: auto; border-radius: 10px;">
+                    {% endif %}
+                </div>
+
+                <!-- Item Name and Quantity Display -->
+                <div style="flex-grow: 1; margin-right: 10px;">
+                    <span class="pantry-item" style="font-weight: bold;">{{ item.name }}</span>
+                    <span class="pantry-quantity" style="color: #555;">Qty: {{ item.quantity }}</span>
+                </div>
+
+                <!-- Quantity Adjustment Form -->
+                <form class="quantity-form" action="{% url 'adjust_quantity' item.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="0">
+                    <input type="submit" value="Update">
+                </form>
+                 <div class="nutritional-info">
+                    <p>Protein: {{ item.protein }}g</p>
+                    <p>Cholesterol: {{ item.cholesterol }}mg</p>
+                    <p>Energy: {{ item.energy }}kcal</p>
+                    <p>Carbohydrate: {{ item.carbohydrate }}g</p>
+                </div>
+
+                <!-- Delete Button -->
+                <form action="{% url 'delete_item' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">X</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No items in the pantry.</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{% url 'add_pantry_item' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Item Name" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <input type="submit" value="Add Item">
+    </form>
+
+    <form action="{% url 'clear_pantry' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Clear Pantry">
+    </form>
+</body>
+
+</html>
