@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Information for Julian Date: {{ tracker.julianDay }}</h2>
+<p>Year: {{ tracker.year }}</p>
+<p>Breakfast Recipe: {{ tracker.breakfast_recipe.recipe_name }}</p>
+<p>Lunch Recipe: {{ tracker.lunch_recipe.recipe_name }}</p>
+<p>Dinner Recipe: {{ tracker.dinner_recipe.recipe_name }}</p>
+
+<h2>Update the recipe ID's here:</h2>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="breakfast_recipe_id">Breakfast Recipe ID:</label>
+        <input type="text" id="breakfast_recipe_id" name="breakfast_recipe_id">
+    </div>
+    <div>
+        <label for="lunch_recipe_id">Lunch Recipe ID:</label>
+        <input type="text" id="lunch_recipe_id" name="lunch_recipe_id">
+    </div>
+    <div>
+        <label for="dinner_recipe_id">Dinner Recipe ID:</label>
+        <input type="text" id="dinner_recipe_id" name="dinner_recipe_id">
+    </div>
+    <input type="hidden" name="julianDay" value="{{ tracker.julianDay }}">
+    <button type="submit">Update Recipes</button>
+</form>
+
+{% endblock %}

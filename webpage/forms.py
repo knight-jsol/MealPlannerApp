@@ -16,6 +16,10 @@ class LoginForm(AuthenticationForm):
     )
 
 
+class JulianDateForm(forms.Form):
+    julian_date = forms.IntegerField(label='Julian Date', min_value=0)
+
+
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipes

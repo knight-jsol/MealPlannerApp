@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from collections import defaultdict
-from .models import PantryItem, Ingredients, RecipeIngredients, Recipes
-from .forms import LoginForm, RecipeForm, RecipeIngredientForm
+from .models import *
+from .forms import *
 from django.forms import formset_factory
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -137,11 +137,69 @@ def add_item(request):
 
 
 # Clears the pantry
-def clear_pantry(request):
+def clear_pantry(request):    
     if request.user.is_authenticated:
         PantryItem.objects.filter(user=request.user).delete()
     return HttpResponseRedirect('/pantry')
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    cart = request.session.get('cart', {})
+    items = Item.objects.filter(id__in=cart.keys())
+    return render(request, 'cart.html', {'cart': cart, 'items': items})
+
+def add_to_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    cart[item_id] = cart.get(item_id, 0) + 1
+    request.session['cart'] = cart
+    return redirect('cart_detail')
+
+def remove_from_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    if item_id in cart:
+        del cart[item_id]
+    request.session['cart'] = cart
+    return redirect('cart_detail')
+# surely I will replace this before the end of semester :clueless:
+
+
+def lgoin(request):
+    return render(request, 'login.html')
+
+def calendar(request):
+    if request.method == 'POST' and ('breakfast_recipe_id' in request.POST or 
+        'dinner_recipe_id' in request.POST or 'lunch_recipe_id' in request.POST):
+        # This block handles the recipe update form
+        julian_date = request.POST.get('julianDay')
+        tracker = get_object_or_404(CalendarTracker, julianDay=julian_date, year=2023)
+
+        breakfast_id = request.POST.get('breakfast_recipe_id')
+        lunch_id = request.POST.get('lunch_recipe_id')
+        dinner_id = request.POST.get('dinner_recipe_id')
+
+        if breakfast_id:
+            tracker.breakfast_recipe = Recipes.objects.get(pk=breakfast_id)
+        if lunch_id:
+            tracker.lunch_recipe = Recipes.objects.get(pk=lunch_id)
+        if dinner_id:
+            tracker.dinner_recipe = Recipes.objects.get(pk=dinner_id)
+        
+        tracker.save()
+        return render(request, 'calendar.html', {'tracker': tracker})
+    elif request.method == 'POST':
+        form = JulianDateForm(request.POST)
+        if form.is_valid():
+            julian_date = form.cleaned_data['julian_date']
+            tracker, created = CalendarTracker.objects.get_or_create(julianDay=julian_date, defaults={'year': 2023})
+            if created:
+                # Perform additional actions if needed when a new record is created
+                pass
+
+            return render(request, 'calendar.html', {'tracker': tracker})
+    else:
+        form = JulianDateForm()
+
+    return render(request, 'calendar_form.html', {'form': form})
+    
+
+    
