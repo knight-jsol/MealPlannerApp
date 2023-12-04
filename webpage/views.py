@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import PantryItem
-from .forms import LoginForm, AllergyDietForm, RecipeInformationForm, IngredientListForm
+from collections import defaultdict
+from .models import PantryItem, Ingredients, RecipeIngredients, Recipes
+from .forms import LoginForm, RecipeForm, RecipeIngredientForm
+from django.forms import formset_factory
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -47,16 +49,64 @@ def home(request):
 
 
 def create_recipe(request):
-    allergy_diet_form = AllergyDietForm()
-    recipe_info_form = RecipeInformationForm()
-    ingredient_list_form = IngredientListForm()
+    # Get the user's pantry items (ingredient IDs)
+    user_pantry_item_ids = PantryItem.objects.filter(user=request.user).values_list('item_name', flat=True)
 
-    context = {
-        'allergy_diet_form': allergy_diet_form,
-        'recipe_info_form': recipe_info_form,
-        'ingredient_list_form': ingredient_list_form,
-    }
-    return render(request, 'create_recipe.html')
+    # Get all recipes and their ingredients
+    all_recipes = Recipes.objects.all()
+    recipe_ingredient_pairs = RecipeIngredients.objects.filter(recipe_id__in=all_recipes).values_list('recipe_id',
+                                                                                                      'ingredient_id')
+
+    # Count matching ingredients for each recipe
+    recipe_match_counts = defaultdict(int)
+    for recipe_id, ingredient_id in recipe_ingredient_pairs:
+        if ingredient_id in user_pantry_item_ids:
+            recipe_match_counts[recipe_id] += 1
+
+    # Sort recipes by the number of matching ingredients
+    sorted_recipes = sorted(recipe_match_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+
+    # Fetch the recipe details for the top matching recipes
+    top_recipes = [Recipes.objects.get(id=recipe_id) for recipe_id, _ in sorted_recipes]
+
+    # Prepare final data to pass to the template
+    recipe_details = [{'recipe': recipe, 'matching_ingredients': recipe_match_counts[recipe.id]} for recipe in
+                      top_recipes]
+
+    return render(request, 'create_recipe.html', {'recipe_details': recipe_details})
+
+
+def add_recipe(request):
+    if request.method == 'POST':
+        recipe_form = RecipeForm(request.POST)
+        if recipe_form.is_valid():
+            recipe = recipe_form.save(commit=False)
+            recipe.user_id = request.user  # assuming you have a user model
+            recipe.save()
+
+            # Process dynamic ingredient fields
+            ingredient_names = request.POST.getlist('ingredient_name[]')
+            units = request.POST.getlist('unit[]')
+            quantities = request.POST.getlist('quantity[]')
+
+            for name, unit, quantity in zip(ingredient_names, units, quantities):
+                RecipeIngredients.objects.create(
+                    recipe_id=recipe,
+                    ingredient_id=name,
+                    unit_id=unit,
+                    qty_id=quantity
+                )
+
+            return redirect('some_view')  # Redirect to a desired page
+
+    else:
+        recipe_form = RecipeForm()
+
+    ingredients = Ingredients.objects.all()
+    return render(request, 'add_recipe.html', {
+        'recipe_form': recipe_form,
+        'ingredients': ingredients
+    })
 
 
 def pantry(request):
@@ -66,6 +116,10 @@ def pantry(request):
 
 def forgot_password(request):
     return render(request, 'forgot_password.html')
+
+
+def help(request):
+    return render(request, 'help.html')
 
 
 def my_recipes(request):
