@@ -1,0 +1,86 @@
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
+</head>
+
+<header>
+    <h1>Meal Preparation</h1>
+</header>
+
+<body style="font-size: 18px">
+<h2>Have a question? We're here to help.</h2>
+    <div class="scroll-bg"></div>
+    <select style="font-size: 18px" name="helpChoice" id="helpChoice" onchange="msg()">
+        <option value="0">Select Question</option>
+        <option value="1">How do I view my recipes?</option>
+        <option value="2">How do I create a recipe?</option>
+        <option value="4">Why can't I sign in?</option>
+        <option value="5">Can I delete my account?</option>
+        <option value="6">Is this app finished?</option>
+        <option value="7">Can I send feedback?</option>
+        <option value="3">How can I contact support?</option>
+    </select>
+    <p id="text" name="text"></p>
+    <div class="button-container">
+        <a href="{% url 'home' %}">Back Home</a>
+    </div>
+<footer>
+    <h4>Did you find this helpful?</h4>
+    <button type="button" class="btn btn-primary mt-3">Yes</button>
+    <button type="button" class="btn btn-primary mt-3">No</button>
+</footer>
+</body>
+<script>
+    function msg(x){
+        var stat = document.getElementById("helpChoice").value
+        if (stat === "0"){
+            document.getElementById("text").innerText=""
+        }
+        if (stat === "1"){
+            document.getElementById("text").innerText="Recipes are generated in the 'create recipe' page." +
+                " After being finish and set up accordingly, they will appear in your account's 'my recipes' page." +
+                " You can use the search bar at the top of your 'my recipes' page to help navigate through your favorite" +
+                " recipes and find the one you're looking for."
+        }
+        if (stat === "2"){
+            document.getElementById("text").innerText="Recipes are generated in the 'create recipe' page. " +
+                "You can find this page by going to the home page and clicking the large 'Create a Recipe' button. " +
+                "Once the page has loaded, proceed to fill in the required information i.e. allergy and dietary preferences, " +
+                "recipe information, and a list of the ingredients. Once complete, the form will be able to be submitted, after" +
+                " which, it can be found inside your 'my recipes' page."
+        }
+        if (stat === "4"){
+            document.getElementById("text").innerText="If you're running into trouble signing in to your account, you may" +
+                " have forgotten your password. No worries there's an easy solution; go the 'forgot password' page and fill" +
+                " in all the required information. Following this, you should possibly be messaged" +
+                " further instructions detailing how to set up a new password."
+        }
+        if (stat === "5"){
+            document.getElementById("text").innerText="If, for any reason, you may decide you no longer want your account, can have it deleted. " +
+                "Please note, once your account is deleted, it is permanent and cannot be undone. If you are certain you want" +
+                " to have your account and it's information deleted, please contact MealPlannerApp@uwm.edu via email and mention " +
+                "account deletion. You will be asked confirmation once before final deletion, which cannot be reverted. All of your " +
+                "personal information, like username, password, saved recipes, will be erased."
+        }
+        if (stat === "6"){
+            document.getElementById("text").innerText="This app is currently in its early stages, it is not finished. We plan on spending much more time " +
+                "adding improvements and features that make our app more user-friendly and increases its performance level." +
+                " Updates are currently being made to the app on a weekly basis. We kindly request that you display some " +
+                "patience when using the app, many issues are yet to be solved and new features are just around the corner. "
+        }
+        if (stat === "7"){
+            document.getElementById("text").innerText="We always appreciate any feedback you have for us. You can send " +
+                "summaries of your personal experience using our app, reviews, ideas, recommendations, or anything else to our " +
+                "team at MealPlannerApp@uwm.edu. Please note that we don't always end up using every idea that comes our way. " +
+                "We want to hear from you, don't hesitate to contact us."
+        }
+        if (stat === "3"){
+            document.getElementById("text").innerText="If none of these questions could help you, please reach out to our support team at" +
+                " MealPlannerApp@uwm.edu. Please attach a detailed description of your problem along with informative screenshots." +
+                " You should expect a response between 1/2 business days."
+        }
+    }
+</script>
+{% endblock %}

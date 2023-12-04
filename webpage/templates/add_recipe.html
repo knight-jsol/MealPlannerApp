@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Add Recipe</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ recipe_form.as_p }}
+
+        <h2>Ingredients</h2>
+        <div id="ingredients-container">
+            <!-- Placeholder for ingredient forms -->
+        </div>
+        <button type="button" id="add-ingredient">Add Ingredient</button>
+
+        <button type="submit">Add Recipe</button>
+    </form>
+
+    <script>
+        function addIngredientForm() {
+            const container = document.getElementById('ingredients-container');
+            const newField = document.createElement('div');
+            newField.innerHTML = `
+                <div>
+                    <select name="ingredient_name[]">
+                        {% for ingredient in ingredients %}
+                        <option value="{{ ingredient.id }}">{{ ingredient.food }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="unit[]" placeholder="Unit">
+                    <input type="text" name="quantity[]" placeholder="Quantity">
+                    <button type="button" onclick="removeIngredientForm(this)">Remove</button>
+                </div>`;
+            container.appendChild(newField);
+        }
+
+        function removeIngredientForm(btn) {
+            const field = btn.parentNode;
+            field.remove();
+        }
+
+        document.getElementById('add-ingredient').addEventListener('click', addIngredientForm);
+    </script>
+</body>
+</html>
