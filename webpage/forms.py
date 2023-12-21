@@ -12,6 +12,12 @@ from django.core.files import File
 from .models import UserProfile
 
 
+class AddIngredientForm(forms.ModelForm):
+    class Meta:
+        model = CartItem
+        fields = ['item_name', 'quantity']
+
+
 class LoginForm(AuthenticationForm):
     # Add any custom fields if necessary, otherwise just use the standard ones
     username = forms.CharField(
