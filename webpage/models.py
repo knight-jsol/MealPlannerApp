@@ -46,6 +46,15 @@ class Recipes(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
+class Cart(models.Model):
+    ingredients = models.ManyToManyField("CartItem")
+
+
+class CartItem(models.Model):
+    item_name = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+
+
 class Ingredients(models.Model):
     food = models.CharField(max_length=100)
     measure = models.CharField(max_length=100)
@@ -80,7 +89,7 @@ class RecipeIngredients(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=20)

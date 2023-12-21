@@ -1,7 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+
+            header {
+                background-color: #333;
+                color: white;
+                padding: 10px 0;
+                text-align: center;
+            }
+
+            h1, h2 {
+                margin: 0;
+                padding: 20px 0;
+            }
+
+            form {
+                margin: 20px auto;
+                width: 80%;
+            }
+
+            form button {
+                background-color: #008CBA; /* Blue */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            ul li {
+                background-color: #ddd;
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
     <header>
-        <h1>Create Recipe</h1>
+        <h1>Add Ingredient to Cart</h1>
     </header>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <h2>Your Cart</h2>
+    <ul>
+        {% for item in cart_items %}
+            <li>{{ item.item_name }} - Quantity: {{ item.quantity }}</li>
+        {% empty %}
+            <li>Your cart is empty.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'export_cart' %}" style="background-color: #008CBA; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;">Export Cart</a>
 {% endblock %}

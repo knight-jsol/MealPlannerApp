@@ -16,8 +16,15 @@ from django.views.decorators.http import require_POST
 from .utils import generate_image
 from django.shortcuts import get_object_or_404
 from .nutrition_lookup import get_nutritional_data
-from .forms import UserProfileForm
-from .models import UserProfile
+from .forms import *
+from .models import *
+from django.contrib.auth import get_user_model, logout
+from openai import OpenAI
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')  # Assumes you have a view named 'login'
 
 
 def login_view(request):
@@ -200,7 +207,32 @@ def delete_item(request, item_id):
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    if request.method == 'POST':
+        form = AddIngredientForm(request.POST)
+        if form.is_valid():
+            cart_item = form.save()
+            cart, created = Cart.objects.get_or_create(pk=1)  # Get or create the Cart object
+            cart.ingredients.add(cart_item)
+    else:
+        form = AddIngredientForm()
+
+    cart, created = Cart.objects.get_or_create(pk=1)  # Get or create the Cart object
+    cart_items = cart.ingredients.all()
+
+    return render(request, 'cart.html', {'form': form, 'cart_items': cart_items})
+
+
+def export_cart(request):
+    cart, created = Cart.objects.get_or_create(pk=1)
+    cart_items = cart.ingredients.all()
+
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename="cart.txt"'
+
+    for item in cart_items:
+        response.write(f"{item.item_name} : {item.quantity}\n")
+
+    return response
 
 
 @login_required
