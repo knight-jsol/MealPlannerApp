@@ -1,11 +1,15 @@
 # views.py
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
+from openai import OpenAI
+
 from .models import PantryItem
-from .forms import LoginForm, AllergyDietForm, RecipeInformationForm, IngredientListForm
+from .forms import LoginForm, IngredientListForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -16,6 +20,7 @@ from django.shortcuts import get_object_or_404
 from .nutrition_lookup import get_nutritional_data
 from .forms import UserProfileForm
 from .models import UserProfile
+from .models import RecipesMade
 
 
 def login_view(request):
@@ -47,16 +52,48 @@ def home(request):
 
 
 def create_recipe(request):
-    allergy_diet_form = AllergyDietForm()
-    recipe_info_form = RecipeInformationForm()
-    ingredient_list_form = IngredientListForm()
+    recipes = []
+    if request.method == 'POST':
+        # Initialize the OpenAI client with your API key
+        client = OpenAI(api_key="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")
 
-    context = {
-        'allergy_diet_form': allergy_diet_form,
-        'recipe_info_form': recipe_info_form,
-        'ingredient_list_form': ingredient_list_form,
-    }
-    return render(request, 'create_recipe.html')
+        # Fetch pantry items from the database
+        pantry_items = PantryItem.objects.all()
+        pantry_items_list = [item.name for item in pantry_items]
+
+        # Send a prompt to ChatGPT
+        prompt = f"Generate a list of recipes using the following pantry items: {', '.join(pantry_items_list)}. Start each recipe with Recipe Title: and then list the Ingredients: followed by Instructions: (so basically by section with a colon after it and it starts with an uppercase letter)."
+
+        response = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": "Generate a list of recipes"},
+            ],
+            model="gpt-4",
+        )
+
+        # Retrieve the generated recipes from the API response
+        recipes_text = response.choices[0].message.content
+
+        # Process 'recipes_text' to extract individual recipes
+        recipe_texts = recipes_text.split("Recipe Title:")[1:]  # Split and ignore the first empty element
+        for text in recipe_texts:
+            title_end = text.find("Ingredients:")
+            ingredients_end = text.find("Instructions:")
+
+            title = text[:title_end].strip()
+            ingredients = text[title_end + len("Ingredients:"):ingredients_end].strip()
+            instructions = text[ingredients_end + len("Instructions:"):].strip()
+
+            recipe = RecipesMade(
+                title=title,
+                ingredients=ingredients,
+                instructions=instructions
+            )
+
+            recipes.append({"title": title, "ingredients": ingredients, "instructions": instructions})
+            recipe.save()
+    return render(request, 'create_recipe.html', {'recipes': recipes})
 
 
 def pantry(request):
@@ -82,7 +119,6 @@ def profile(request):
         full_name = None
 
     return render(request, 'profile.html', {'full_name': full_name})
-
 
 
 # Adds item to pantry

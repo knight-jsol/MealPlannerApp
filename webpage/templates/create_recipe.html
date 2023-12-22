@@ -1,84 +1,47 @@
 {% load static %}
 
-{% block content %}
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Allergy and Dietary Preferences</title>
+    <title>Create Recipes with ChatGPT</title>
     <link rel="stylesheet" type="text/css" href="{% static 'sheet.css' %}">
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .recipe-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
+    <h1>Generated Recipes Based on Pantry Items</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary mt-3">Generate Recipes</button>
+    </form>
 
-    <h1 class="center-text">Allergy and Dietary Preferences</h1>
-
-    <form method="post" action="{% url 'create_recipe' %}">
-    {% csrf_token %}
-    {{ allergy_diet_form.as_p }}
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-</form>
-<br />
-
-    <h1 class="center-text">Recipe Information </h1>
-
-    <form method="post" action="{% url 'create_recipe' %}">
-    {% csrf_token %}
-    {{ recipe_info_form.as_p }}
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-</form>
-<br />
-
-    <h1 class="center-text">Ingredient List </h1>
-   <form method="post" action="{% url 'create_recipe' %}">
-    {% csrf_token %}
-    {{ ingredient_list_form.as_p }}
-    <!-- Your JavaScript will handle adding more fields -->
-</form>
-    <br />
-
+<div id="recipesList" class="mt-4">
+    {% for recipe in recipes %}
+        <div class="recipe-card">
+            <h5>{{ recipe.title }}</h5>
+            <h6>Ingredients:</h6>
+            <p>{{ recipe.ingredients }}</p>
+            <h6>Instructions:</h6>
+            <p>{{ recipe.instructions }}</p>
+        </div>
+    {% empty %}
+        <p>No recipes found. Try generating again.</p>
+    {% endfor %}
+</div>
 </div>
 
-<!-- Bootstrap JS (optional) -->
+<!-- Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-function addIng1()
-        {
-            document.getElementById("btn1").style.display="none";
-            document.getElementById("btn2").style.display="initial";
-            var div1=document.getElementById("ing1");
-            div1.innerHTML="<input type='text'/>";
-        }
-function addIng2()
-        {
-            document.getElementById("btn2").style.display="none";
-            document.getElementById("btn3").style.display="initial";
-            var div1=document.getElementById("ing2");
-            div1.innerHTML="<input type='text'/>";
-        }
-function addIng3()
-        {
-            document.getElementById("btn3").style.display="none";
-            document.getElementById("btn4").style.display="initial";
-            var div1=document.getElementById("ing3");
-            div1.innerHTML="<input type='text'/>";
-        }
-function addIng4()
-        {
-            document.getElementById("btn4").style.display="none";
-            document.getElementById("btn5").style.display="initial";
-            var div1=document.getElementById("ing4");
-            div1.innerHTML="<input type='text'/>";
-        }
-function addIng5()
-        {
-            document.getElementById("btn5").style.display="none";
-            var div1=document.getElementById("ing5");
-            div1.innerHTML="<input type='text'/>";
-        }
- </script>
 </body>
-</html>
-{% endblock %}
+</html>7
