@@ -1,4 +1,4 @@
-#models.py
+# models.py
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -42,7 +42,6 @@ class RecipesMade(models.Model):
     # Add the Meta class inside the RecipesMade model
     class Meta:
         db_table = 'webpage_recipesmade'  # Explicitly set the table name
-
 
 
 class UserProfile(models.Model):

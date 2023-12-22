@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 
 def generate_image(prompt):
-    api_key = "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"
+    api_key = "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"
     endpoint = "https://api.openai.com/v1/images/generations"
 
     headers = {
