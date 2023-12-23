@@ -14,30 +14,7 @@
             background: linear-gradient(to bottom right, #FCE3D8, #E9E2F0);
             padding: 40px; /* More space around */
         }
-        nav {
-            background-color: #f2f2f2;
-            padding: 10px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav ul li button {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
 
         h1 {
             text-align: center;
@@ -99,13 +76,6 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><button onclick="history.back()">Go Back</button></li>
-            <!-- Other navigation items can be added here if needed -->
-        </ul>
-    </nav>
 
     <h1>My Saved Recipes</h1>
 
@@ -118,11 +88,11 @@
             <img src="{% static 'BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9.jpg' %}" alt="Recipe Image 1">
         </div>
         <div class="recipe-content">
-            <h2>Recipe Name 1</h2>
+            <h2>Chocolate Chip Cookies</h2>
             <div class="recipe-details">
                 <span class="detail">Calories: 250</span>
-                <span class="detail">Sugars: 10g</span>
-                <span class="detail">Protein: 20g</span>
+                <span class="detail">Sugars: 50g</span>
+                <span class="detail">Protein: 0g</span>
             </div>
         </div>
     </div>
@@ -132,10 +102,10 @@
             <img src="{% static 'f2203c0e403286947dcf80815b656236fec71e88.jpeg' %}" alt="Recipe Image 2">
         </div>
         <div class="recipe-content">
-            <h2>Recipe Name 2</h2>
+            <h2>Margarita Pizza</h2>
             <div class="recipe-details">
                 <span class="detail">Calories: 300</span>
-                <span class="detail">Sugars: 12g</span>
+                <span class="detail">Sugars: 10g</span>
                 <span class="detail">Protein: 15g</span>
             </div>
         </div>

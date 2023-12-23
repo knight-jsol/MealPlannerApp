@@ -52,3 +52,12 @@ class UserProfile(models.Model):
     mobile = models.CharField(max_length=20)
     address = models.TextField()
     profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+
+
+class Cart(models.Model):
+    ingredients = models.ManyToManyField("CartItem")
+
+
+class CartItem(models.Model):
+    item_name = models.CharField(max_length=100)
+    quantity = models.IntegerField()
